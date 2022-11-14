@@ -11,6 +11,9 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var passwordTf: UITextField!
     @IBOutlet weak var emailTf: UITextField!
+    
+    private var viewModel = LoginViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,7 +31,14 @@ class LoginViewController: UIViewController {
     }
     */
     @IBAction func onLoginSubmit(_ sender: Any) {
-        
+        viewModel.login(emailTf.text, passwordTf.text) { result in
+            if(result){
+                let naviController = UINavigationController(rootViewController: MessengerViewController(nibName: nil, bundle: nil))
+                naviController.isNavigationBarHidden = true
+                UIApplication.shared.currentWindow?.rootViewController = naviController
+                
+            }
+        }
     }
     
     @IBAction func navigateRegister(_ sender: Any) {

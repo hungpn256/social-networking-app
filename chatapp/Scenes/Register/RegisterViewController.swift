@@ -8,7 +8,15 @@
 import UIKit
 
 class RegisterViewController: UIViewController {
-
+    
+    @IBOutlet weak var passwordTf: UITextField!
+    @IBOutlet weak var genderTf: UITextField!
+    @IBOutlet weak var phoneTf: UITextField!
+    @IBOutlet weak var emailTf: UITextField!
+    @IBOutlet weak var lastNameTf: UITextField!
+    @IBOutlet weak var firstNameTf: UITextField!
+    
+    private let viewModel = RegisterViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,4 +34,16 @@ class RegisterViewController: UIViewController {
     }
     */
 
+    @IBAction func signUp(_ sender: Any) {
+        guard let email = emailTf.text, let password = passwordTf.text, let phoneNumber = phoneTf.text, let firstName = firstNameTf.text, let lastName = lastNameTf.text, let gender = genderTf.text else{
+            return
+        }
+        viewModel.register(body: ["email": email, "password": password, "firstName": firstName, "lastName": lastName, "phoneNumber": phoneNumber, "gender":gender]) { res in
+            if(res){
+                let naviController = UINavigationController(rootViewController: LoginViewController(nibName: nil, bundle: nil))
+                naviController.isNavigationBarHidden = true
+                UIApplication.shared.currentWindow?.rootViewController = naviController
+            }
+        }
+    }
 }

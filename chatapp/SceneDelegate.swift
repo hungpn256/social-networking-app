@@ -16,7 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        let navigator = UINavigationController(rootViewController: LoginViewController(nibName: nil, bundle: nil))
+        let token = UserDefaults.standard.string(forKey: AppContant.token)
+        let vc = token == nil ? LoginViewController(nibName: nil, bundle: nil): MessengerViewController(nibName: nil, bundle: nil)
+        let navigator = UINavigationController(rootViewController: vc)
+        navigator.isNavigationBarHidden = true
         window?.rootViewController = navigator
         guard let _ = (scene as? UIWindowScene) else { return }
     }

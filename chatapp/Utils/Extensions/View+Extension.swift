@@ -85,25 +85,4 @@ extension UIView {
             layer.masksToBounds = value
         }
     }
-    
-    func animationShow() {
-        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn],
-                          animations: {
-                           self.center.y -= self.bounds.height
-                           self.layoutIfNeeded()
-           }, completion: nil)
-           self.isHidden = false
-
-       }
-
-    func animationHidden() {
-           UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear],
-                          animations: {
-                           self.center.y += self.bounds.height
-                           self.layoutIfNeeded()
-
-           },  completion: {(_ completed: Bool) -> Void in
-           self.isHidden = true
-               })
-       }
 }
